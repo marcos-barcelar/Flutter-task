@@ -8,15 +8,13 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
-
   TextEditingController nameController = TextEditingController();
   TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return (
-    Scaffold(
+    return (Scaffold(
       appBar: AppBar(
         title: Text('Nova Tarefa'),
       ),
@@ -25,10 +23,9 @@ class _FormScreenState extends State<FormScreen> {
           height: 650,
           width: 400,
           decoration: BoxDecoration(
-            color: Colors.black12,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(width: 3)
-          ),
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(width: 3)),
           child: Column(
             children: [
               Padding(
@@ -40,7 +37,7 @@ class _FormScreenState extends State<FormScreen> {
                     border: OutlineInputBorder(),
                     hintText: 'Nome',
                     fillColor: Colors.white70,
-                      filled: true,
+                    filled: true,
                   ),
                 ),
               ),
@@ -53,36 +50,62 @@ class _FormScreenState extends State<FormScreen> {
                     border: OutlineInputBorder(),
                     hintText: 'Dificuldade',
                     fillColor: Colors.white70,
-                      filled: true,
+                    filled: true,
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  onChanged: (text){
+                    setState(() {
+
+                    });
+                  },
                   controller: imageController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'URL',
                     fillColor: Colors.white70,
-                      filled: true,
+                    filled: true,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 100,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 2, color: Colors.blue),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      imageController.text,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset('assets/imgs/nophoto.png');
+                      },
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
               ElevatedButton(
-                onPressed: (){
-                print(nameController.text);
-                print(int.parse(difficultyController.text));
-                print(imageController.text);
-              },
+                onPressed: () {
+                  print(nameController.text);
+                  print(int.parse(difficultyController.text));
+                  print(imageController.text);
+                },
                 child: Text('Adicionar!'),
               ),
             ],
           ),
         ),
       ),
-    )
-    );
+    ));
   }
 }
